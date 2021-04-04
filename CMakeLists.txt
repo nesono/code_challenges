@@ -1,0 +1,12 @@
+# cmake_minimum_required(VERSION <specify CMake version here>)
+project(2020_01_21_cxx20_playground)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(2020_01_21_cxx20_playground main.cpp red_black_tree.h)
+add_executable(guenther_kaese_linked_list guenther_kaese_linked_list.cpp)
+add_executable(guenther_kaese_isutf8 guenther_kaese_isutf8.cpp)
+add_executable(leet_code_problem_53_sum leet_code_problem_53_sum.cpp)
+add_executable(leet_code_problem_70_climbing_stairs leet_code_problem_70_climbing_stairs.cpp)
+add_executable(leet_code_problem_121_best_time_to_sell_stock leet_code_problem_121_best_time_to_sell_stock.cpp)
+add_executable(leet_code_problem_63_unique_paths_ii leet_code_problem_63_unique_paths_ii.cpp)
