@@ -3,7 +3,7 @@
 // #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     static int uniquePathCountHelper(vector<vector<int>>& obstacleGrid, size_t x, size_t y,
                                      size_t dim_x, size_t dim_y) {
@@ -51,32 +51,32 @@ int main() {
         vector<vector<int>> obstacleGrid{{0, 0, 0},
                                          {0, 1, 0},
                                          {0, 0, 0}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 2);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 2);
     }
     {
         vector<vector<int>> obstacleGrid{{0, 1},
                                          {0, 0}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 1);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 1);
     }
     {
         vector<vector<int>> obstacleGrid{{1}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 0);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 0);
     }
     {
         vector<vector<int>> obstacleGrid{{0,0}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 1);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 1);
     }
     {
         vector<vector<int>> obstacleGrid{{}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 0);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 0);
     }
     {
         vector<vector<int>> obstacleGrid{{1,0}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 0);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 0);
     }
     {
         vector<vector<int>> obstacleGrid{{0,0,0,0},{0,1,0,0},{0,0,0,0},{0,0,1,0},{0,0,0,0}};
-        assert(Solution::uniquePathsWithObstacles(obstacleGrid) == 7);
+        assert(Solution1::uniquePathsWithObstacles(obstacleGrid) == 7);
     }
 
     return 0;

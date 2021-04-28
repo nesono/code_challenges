@@ -22,7 +22,7 @@ struct ListNode {
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class Solution1 {
 public:
     static ListNode* advance(ListNode* node) {
         if (node != nullptr) {
@@ -99,21 +99,21 @@ int main() {
         auto l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
         auto l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
 
-        auto result = Solution::addTwoNumbers(l1, l2);
+        auto result = Solution1::addTwoNumbers(l1, l2);
         print_list(result);
     }
     {
         auto l1 = new ListNode(0);
         auto l2 = new ListNode(0);
 
-        auto result = Solution::addTwoNumbers(l1, l2);
+        auto result = Solution1::addTwoNumbers(l1, l2);
         print_list(result);
     }
     {
         auto l1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
         auto l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
 
-        auto result = Solution::addTwoNumbers(l1, l2);
+        auto result = Solution1::addTwoNumbers(l1, l2);
         print_list(result);
     }
     {
@@ -122,7 +122,7 @@ int main() {
         auto l1 = new ListNode(2, new ListNode(4, new ListNode(9)));
         auto l2 = new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9))));
 
-        auto result = Solution::addTwoNumbers(l1, l2);
+        auto result = Solution1::addTwoNumbers(l1, l2);
         print_list(result);
     }
 }

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     // implementation using Kadane's algorithm
     static int maxSubArray(vector<int>& nums) {
@@ -22,5 +22,5 @@ public:
 
 int main() {
     vector<int> nums{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-    std::cout << Solution::maxSubArray(nums) << std::endl;
+    std::cout << Solution1::maxSubArray(nums) << std::endl;
 }

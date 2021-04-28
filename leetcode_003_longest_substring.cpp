@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     static int lengthOfLongestSubstring(string s) {
         if (s.empty()) {
@@ -35,9 +35,9 @@ public:
 
 
 int main() {
-    std::cout << "Solution for abcabcbb (3): " << Solution::lengthOfLongestSubstring("abcabcbb") << std::endl;
-    std::cout << "Solution for bbbbb (1): " << Solution::lengthOfLongestSubstring("bbbbb") << std::endl;
-    std::cout << "Solution for pwwkew (3): " << Solution::lengthOfLongestSubstring("pwwkew") << std::endl;
-    std::cout << "Solution for '' (0): " << Solution::lengthOfLongestSubstring("") << std::endl;
-    std::cout << "Solution for dvdf (3): " << Solution::lengthOfLongestSubstring("dvdf") << std::endl;
+    std::cout << "Solution for abcabcbb (3): " << Solution1::lengthOfLongestSubstring("abcabcbb") << std::endl;
+    std::cout << "Solution for bbbbb (1): " << Solution1::lengthOfLongestSubstring("bbbbb") << std::endl;
+    std::cout << "Solution for pwwkew (3): " << Solution1::lengthOfLongestSubstring("pwwkew") << std::endl;
+    std::cout << "Solution for '' (0): " << Solution1::lengthOfLongestSubstring("") << std::endl;
+    std::cout << "Solution for dvdf (3): " << Solution1::lengthOfLongestSubstring("dvdf") << std::endl;
 }

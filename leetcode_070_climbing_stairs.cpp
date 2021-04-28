@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
 
-class Solution {
+class Solution1 {
 public:
     int climbStairs(int n) {
         assert (n > 0);
@@ -23,6 +23,6 @@ public:
 };
 
 int main() {
-    Solution solution;
+    Solution1 solution;
     std::cout << solution.climbStairs(6) << std::endl;
 }
