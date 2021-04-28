@@ -22,13 +22,13 @@ public:
             return s;
         }
         string result{s[0]};
-        for (string::const_iterator back_iter = std::cbegin(s) + 1;
-             back_iter < std::cend(s); ++back_iter) {
+        for (string::const_iterator right_iter = std::cend(s) - 1;
+             right_iter < std::cend(s); ++right_iter) {
             for (string::const_iterator front_iter = std::cbegin(s);
-                 front_iter < back_iter; ++front_iter) {
-                if (isPalindrome(front_iter, back_iter)) {
-                    if ((back_iter - front_iter + 1) > result.size()) {
-                        result = string(front_iter, back_iter + 1);
+                 front_iter < right_iter; ++front_iter) {
+                if (isPalindrome(front_iter, right_iter)) {
+                    if ((right_iter - front_iter + 1) > result.size()) {
+                        result = string(front_iter, right_iter + 1);
                     }
                 }
             }
@@ -47,16 +47,19 @@ void test_longestPalindrome(const string &input, const string &expected) {
              << "'\n";
         return;
     }
+    cout << "Test succeeded, result: '" << result << "'\n";
+
+    cout << "Starting benchmark\n";
     auto start = std::chrono::steady_clock::now();
 
-    for (auto count = 0U; count < 10; ++count) {
+    for (auto count = 0U; count < 1000; ++count) {
         result = Solution::longestPalindrome(input);
         auto current = std::chrono::steady_clock::now();
         auto elapsed =
                 std::chrono::duration_cast<std::chrono::milliseconds>(
                         current - start);
         if (elapsed.count() >= 400) {
-            cout << "    timeout exceeded. Stopping benchmark.\n";
+            cout << "    timeout exceeded at count " << count << ". Stopping benchmark.\n";
             break;
         }
     }
@@ -64,7 +67,7 @@ void test_longestPalindrome(const string &input, const string &expected) {
     auto elapsed =
             std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     cout << "    Time elapsed: " << elapsed.count() << " ms\n";
-    cout << "Test succeeded, result: '" << result << "'\n\n";
+    cout << "Test case finished\n\n";
 }
 
 int main() {
