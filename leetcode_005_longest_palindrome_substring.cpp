@@ -1,6 +1,6 @@
-#include <chrono>
-#include <iostream>
 #include <string>
+
+#include "leetcode_000_common.h"
 
 using namespace std;
 
@@ -8,7 +8,6 @@ class Solution {
 public:
     static bool isPalindrome(string::const_iterator front_iter,
                              string::const_iterator back_iter) {
-        string helper(front_iter, back_iter + 1);
         while (front_iter < back_iter) {
             if (*(front_iter++) != *(back_iter--)) {
                 return false;
@@ -21,57 +20,24 @@ public:
         if (1 >= s.size()) {
             return s;
         }
-        string result{s[0]};
-        for (string::const_iterator right_iter = std::cend(s) - 1;
-             right_iter < std::cend(s); ++right_iter) {
-            for (string::const_iterator front_iter = std::cbegin(s);
-                 front_iter < right_iter; ++front_iter) {
-                if (isPalindrome(front_iter, right_iter)) {
-                    if ((right_iter - front_iter + 1) > result.size()) {
-                        result = string(front_iter, right_iter + 1);
-                    }
+        // increase the gap from 0 until s.size()-1 -- a single char palindrome
+        for (size_t gap_size = 0U; gap_size < s.size()-1; ++gap_size)
+        {
+            // create longest palindrome candidates with size s.size()-gap_size
+            for (size_t offset = 0U; offset <= gap_size; ++offset) {
+                // if palindrome found, return it
+                if (isPalindrome(begin(s)+offset, end(s)-1-(gap_size-offset))) {
+                    return string(begin(s)+offset, end(s)-(gap_size-offset));
                 }
             }
         }
-        return result;
+        // return first character if nothing found
+        return string{s[0]};
     }
 };
 
-void test_longestPalindrome(const string &input, const string &expected) {
-    cout << "Testing longest palindrome substring  with input '" << input
-         << "'\n";
-    auto result = Solution::longestPalindrome(input);
-    if (result != expected) {
-        cout << "Test FAILED, expected: '" << expected << "' result: '"
-             << result
-             << "'\n";
-        return;
-    }
-    cout << "Test succeeded, result: '" << result << "'\n";
-
-    cout << "Starting benchmark\n";
-    auto start = std::chrono::steady_clock::now();
-
-    for (auto count = 0U; count < 1000; ++count) {
-        result = Solution::longestPalindrome(input);
-        auto current = std::chrono::steady_clock::now();
-        auto elapsed =
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                        current - start);
-        if (elapsed.count() >= 400) {
-            cout << "    timeout exceeded at count " << count << ". Stopping benchmark.\n";
-            break;
-        }
-    }
-    auto end = std::chrono::steady_clock::now();
-    auto elapsed =
-            std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    cout << "    Time elapsed: " << elapsed.count() << " ms\n";
-    cout << "Test case finished\n\n";
-}
-
 int main() {
-    test_longestPalindrome(
+    testSolution( Solution::longestPalindrome,
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -94,7 +60,7 @@ int main() {
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    test_longestPalindrome(
+    testSolution( Solution::longestPalindrome,
             "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedca"
             "nlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpatea"
             "portionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatt"
@@ -110,12 +76,12 @@ int main() {
             "edinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernm"
             "entofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth",
             "ranynar");
-    test_longestPalindrome("cbbd", "bb");
-    test_longestPalindrome("a", "a");
-    test_longestPalindrome("aa", "aa");
-    test_longestPalindrome("aaa", "aaa");
-    test_longestPalindrome("", "");
-    test_longestPalindrome("babad", "bab");
-    test_longestPalindrome("dabac", "aba");
-    test_longestPalindrome("bad", "b");
+    testSolution( Solution::longestPalindrome,"cbbd", "bb");
+    testSolution( Solution::longestPalindrome,"a", "a");
+    testSolution( Solution::longestPalindrome,"aa", "aa");
+    testSolution( Solution::longestPalindrome,"aaa", "aaa");
+    testSolution( Solution::longestPalindrome,"", "");
+    testSolution( Solution::longestPalindrome,"babad", "bab");
+    testSolution( Solution::longestPalindrome,"dabac", "aba");
+    testSolution( Solution::longestPalindrome,"bad", "b");
 }
