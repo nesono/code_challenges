@@ -21,27 +21,28 @@ int testSolution(SolutionType&& solutionFunc, InputType&& input, ResultType&& ex
     std::cout << "        result: '" << result << "'\n";
 
     std::cout << "    Starting benchmark\n";
-    uint64_t elapsed_ms = 0ULL;
-    for (auto count = 0U; count < LEETCODE_TEST_MAX_ITERATIONS; ++count) {
+    uint64_t elapsed_ns = 0ULL;
+    auto count = 0ULL;
+    for (; count < LEETCODE_TEST_MAX_ITERATIONS; ++count) {
         auto start = std::chrono::steady_clock::now();
         auto tmp = solutionFunc(input);
-        auto current = std::chrono::steady_clock::now();
+        auto end = std::chrono::steady_clock::now();
         if (tmp != expected) {
             std::cout << "Result mismatch during benchmark\n";
             std::cout << "    expected: '" << expected << "'\n";
             std::cout << "    result: '" << tmp << "'\n";
         }
-        elapsed_ms +=
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                        current - start).count();
-        if (elapsed_ms >= 100) {
+        elapsed_ns +=
+                std::chrono::duration_cast<std::chrono::nanoseconds>(
+                        end - start).count();
+        if (elapsed_ns >= 1e8) {
             std::cout << "    Timeout exceeded after    ";
             std::cout << count + 1 << " runs.\n";
             std::cout << "    Stopping benchmark.\n";
             break;
         }
     }
-    std::cout << "    Total testing time elapsed_ms: " << elapsed_ms << " ms\n";
+    std::cout << "    Total testing time elapsed_ns: " << elapsed_ns << " ns\n";
     std::cout << "Test case finished successfully \n\n";
     return 0;
 }
