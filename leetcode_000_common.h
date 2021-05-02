@@ -43,4 +43,5 @@ int testSolution(SolutionType&& solutionFunc, InputType&& input, ResultType&& ex
     }
     std::cout << "    Total testing time elapsed_ms: " << elapsed_ms << " ms\n";
     std::cout << "Test case finished successfully \n\n";
+    return 0;
 }

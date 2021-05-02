@@ -1,10 +1,12 @@
 #include <string>
+#include <utility>
+#include <vector>
 
 #include "leetcode_000_common.h"
 
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     static bool isPalindrome(string::const_iterator front_iter,
                              string::const_iterator back_iter) {
@@ -36,6 +38,53 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    // expand string to be odd sized pertaining it's symmetry
+    static string expand(const string& s) {
+        string result;
+        result.reserve(s.size() * 2 + 1);
+        result.push_back('|');
+        for (auto c : s) {
+            result.push_back(c);
+            result.push_back('|');
+        }
+        return result;
+    }
+
+    static string longestPalindrome(const string &s) {
+        if (1 >= s.size()) {
+            return s;
+        }
+        // expand string
+        auto ex_s = expand(s);
+        // implement Manacher's algorithm
+        std::vector<size_t> palindromeRadii{ex_s.size()};
+        palindromeRadii.resize(ex_s.size());
+        size_t center = 0;
+
+        while (center < ex_s.size()) {
+            size_t radius = 0;
+            while ( center-(radius+1) >= 0 &&
+                    center+(radius+1) < ex_s.size() &&
+                    ex_s[center-(radius+1)] == ex_s[center+(radius+1)] ) {
+                ++radius;
+            }
+            palindromeRadii[center] = radius;
+            ++center;
+        }
+
+        std::vector<size_t>::iterator max_elem = std::max_element(std::begin(palindromeRadii),
+                                         std::end(palindromeRadii));
+        auto centerInExs = std::distance(std::begin(palindromeRadii), max_elem);
+        auto centerInS = (centerInExs - 1)/2;
+        auto longestRadiusInExS = *max_elem;
+        auto longestRadiusInS = (longestRadiusInExS-1) / 2;
+        return s.substr(centerInS-longestRadiusInS, longestRadiusInExS);
+    }
+};
+
+using Solution = Solution2;
 int main() {
     testSolution( Solution::longestPalindrome,
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
