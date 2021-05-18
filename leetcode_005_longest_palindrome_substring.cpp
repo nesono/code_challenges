@@ -1,6 +1,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <tuple>
+#include <functional>
 
 #include "leetcode_000_common.h"
 
@@ -202,9 +204,11 @@ public:
 };
 
 using Solution = Solution3;
+
 int main() {
-    testSolution( Solution::longestPalindrome,
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    auto params = vector<tuple<function<string(const string)>, tuple<const string>, string>> {
+            {Solution::longestPalindrome,
+             {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -217,17 +221,17 @@ int main() {
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "aaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    testSolution( Solution::longestPalindrome,
-            "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedca"
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+             {"aaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}},
+            {Solution::longestPalindrome,
+             {"civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedca"
             "nlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpatea"
             "portionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatt"
             "hatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalar"
@@ -240,14 +244,16 @@ int main() {
             "hesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelast"
             "pfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavedi"
             "edinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernm"
-            "entofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth",
-            "ranynar");
-    testSolution( Solution::longestPalindrome,"cbbd", "bb");
-    testSolution( Solution::longestPalindrome,"a", "a");
-    testSolution( Solution::longestPalindrome,"aa", "aa");
-    testSolution( Solution::longestPalindrome,"aaa", "aaa");
-    testSolution( Solution::longestPalindrome,"", "");
-    testSolution( Solution::longestPalindrome,"babad", "bab");
-    testSolution( Solution::longestPalindrome,"dabac", "aba");
-    testSolution( Solution::longestPalindrome,"bad", "b");
+            "entofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"},
+             {"ranynar"}},
+            {Solution::longestPalindrome,{"cbbd"}, {"bb"}},
+            {Solution::longestPalindrome,{"a"}, {"a"}},
+            {Solution::longestPalindrome, {"aa"}, {"aa"}},
+            {Solution::longestPalindrome, {"aaa"}, {"aaa"}},
+            {Solution::longestPalindrome, {""}, {""}},
+            {Solution::longestPalindrome,{"babad"}, {"bab"}},
+            {Solution::longestPalindrome,{"dabac"}, {"aba"}},
+            {Solution::longestPalindrome,{"bad"}, {"b"}},
+    };
+    return testMain(params);
 }

@@ -1,6 +1,9 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <tuple>
+
+#include "leetcode_000_common.h"
 
 using namespace std;
 
@@ -43,20 +46,13 @@ public:
     }
 };
 
-bool test_convert(const string& input, int row_count, const string& expected) {
-    cout << "\nTesting " << input << " row count: " << row_count << "\n";
-    auto result = Solution1::convert(input, row_count);
-    if (result != expected) {
-        cout << "Test failed! expected: " << expected << " result: " << result << "\n";
-        return false;
-    }
-    cout << "Test succeeded!\n";
-    return true;
-}
+using TestParamType = vector<tuple<function<string(const string&, int)>, const tuple<const string&, int>, const string&>>;
+
 int main() {
     const string input{"PAYPALISHIRING"};
-    // Input: s = "PAYPALISHIRING", numRows = 3
-    // Output: "PAHNAPLSIIGYIR"
-    test_convert(input, 3, "PAHNAPLSIIGYIR");
-    test_convert(input, 4, "PINALSIGYAHRPI");
+    TestParamType params = {
+            {Solution1::convert, {input, 3}, "PAHNAPLSIIGYIR"},
+            {Solution1::convert, {input, 4}, "PINALSIGYAHRPI"}
+    };
+    return testMain(params);
 }

@@ -1,6 +1,10 @@
 #include <iostream>
+#include <functional>
+#include <tuple>
 
 #include "leetcode_000_common.h"
+
+using namespace std;
 
 class Solution {
 public:
@@ -25,11 +29,15 @@ public:
     }
 };
 
+using TestParamType = vector<tuple<function<int(int)>, tuple<int>, int>>;
+
 int main() {
-    testSolution(Solution::reverse, 123, 321);
-    testSolution(Solution::reverse, -123, -321);
-    testSolution(Solution::reverse, 0, 0);
-    testSolution(Solution::reverse,
-                 1534236469, 0);
-    testSolution(Solution::reverse, -2147483648, 0);
+    TestParamType testParams = {
+            {Solution::reverse, {123}, 321},
+            {Solution::reverse, {-123}, -321},
+            {Solution::reverse, {0}, 0},
+            {Solution::reverse, {1534236469}, 0},
+            {Solution::reverse, {-2147483648}, 0}
+    };
+    return testMain(testParams);
 }
