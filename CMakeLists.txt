@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(guenther_kaese_linked_list guenther_kaese_linked_list.cpp)
 add_executable(guenther_kaese_isutf8 guenther_kaese_isutf8.cpp)
+add_executable(leetcode_000_common leetcode_000_common.h leetcode_000_common.cpp)
 add_executable(leetcode_002_add_two_numbers leetcode_000_common.h leetcode_002_add_two_numbers.cpp)
 add_executable(leetcode_003_longest_substring leetcode_000_common.h leetcode_003_longest_substring.cpp)
 add_executable(leetcode_005_longest_palindrome_substring leetcode_000_common.h leetcode_005_longest_palindrome_substring.cpp)
