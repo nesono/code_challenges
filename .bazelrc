@@ -1,0 +1,5 @@
+# Default build options
+build --copt="--std=c++20"
+build --copt="-Wall"
+build --copt="-Wextra"
+build --copt="-Wpedantic"
