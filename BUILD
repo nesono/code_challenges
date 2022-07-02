@@ -91,6 +91,14 @@ cc_test(
 )
 
 cc_test(
+    name = "leetcode_1858_longest_word_with_all_prefixes",
+    srcs = [
+        "leetcode_1858_longest_word_with_all_prefixes.cpp",
+    ],
+    deps = [":leetcode_common"],
+)
+
+cc_test(
     name = "leetcode_2021-05-01_number_connected_components_graph",
     srcs = ["leetcode_2021-05-01_number_connected_components_graph.cpp"],
     deps = [":leetcode_common"],

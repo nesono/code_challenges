@@ -1,3 +1,5 @@
+#include <cassert>
+#include <cstdint>
 #include <functional>
 #include <string>
 #include <tuple>
@@ -59,15 +61,17 @@ public:
     }
     // expand string
     auto ex_s = expand(s);
-    // implement Manacher's algorithm
+    // make sure there is no overflow below
+    assert(ex_s.size() <= std::numeric_limits<int64_t>::max());
+    int64_t ex_s_size = static_cast<int64_t>(ex_s.size());
+
     std::vector<size_t> palindromeRadii{ex_s.size()};
-    palindromeRadii.resize(ex_s.size());
+    palindromeRadii.resize(ex_s_size);
     int64_t center = 0;
 
-    while (center < ex_s.size()) {
+    while (center < ex_s_size) {
       int64_t radius = 0;
-      while (center - (radius + 1) >= 0 &&
-             center + (radius + 1) < ex_s.size() &&
+      while (center - (radius + 1) >= 0 && center + (radius + 1) < ex_s_size &&
              ex_s[center - (radius + 1)] == ex_s[center + (radius + 1)]) {
         ++radius;
       }
@@ -90,15 +94,18 @@ public:
     }
     // expand string
     auto ex_s = expand(s);
+    // make sure there is no overflow below
+    assert(ex_s.size() <= std::numeric_limits<int64_t>::max());
+    int64_t ex_s_size = static_cast<int64_t>(ex_s.size());
+
     // implement Manacher's algorithm
     std::vector<size_t> palindromeRadii{ex_s.size()};
-    palindromeRadii.resize(ex_s.size());
+    palindromeRadii.resize(ex_s_size);
     int64_t center = 0;
     int64_t radius = 0;
 
-    while (center < ex_s.size()) {
-      while (center - (radius + 1) >= 0 &&
-             center + (radius + 1) < ex_s.size() &&
+    while (center < ex_s_size) {
+      while (center - (radius + 1) >= 0 && center + (radius + 1) < ex_s_size &&
              ex_s[center - (radius + 1)] == ex_s[center + (radius + 1)]) {
         ++radius;
       }
@@ -111,10 +118,12 @@ public:
       while (center <= oldCenter + oldRadius) {
         auto mirroredCenter = oldCenter - (center - oldCenter);
         auto maxMirroredRadius = oldRadius - (center - oldCenter);
-        if (palindromeRadii[mirroredCenter] < maxMirroredRadius) {
+        if (static_cast<int64_t>(palindromeRadii[mirroredCenter]) <
+            maxMirroredRadius) {
           palindromeRadii[center] = palindromeRadii[mirroredCenter];
           ++center;
-        } else if (palindromeRadii[mirroredCenter] > maxMirroredRadius) {
+        } else if (static_cast<int64_t>(palindromeRadii[mirroredCenter]) >
+                   maxMirroredRadius) {
           palindromeRadii[center] = maxMirroredRadius;
           ++center;
         } else { // palindromeRadii[mirroredCenter] == maxMirroredRadius
@@ -154,15 +163,18 @@ public:
     }
     // expand string
     auto ex_s = expand(s);
+    // make sure there is no overflow below
+    assert(ex_s.size() <= std::numeric_limits<int64_t>::max());
+    int64_t ex_s_size = static_cast<int64_t>(ex_s.size());
+
     // implement Manacher's algorithm
     std::vector<size_t> palindromeRadii{ex_s.size()};
     palindromeRadii.resize(ex_s.size());
     int64_t center = 0;
     int64_t radius = 0;
 
-    while (center < ex_s.size()) {
-      while (center - (radius + 1) >= 0 &&
-             center + (radius + 1) < ex_s.size() &&
+    while (center < ex_s_size) {
+      while (center - (radius + 1) >= 0 && center + (radius + 1) < ex_s_size &&
              ex_s[center - (radius + 1)] == ex_s[center + (radius + 1)]) {
         ++radius;
       }
@@ -175,10 +187,12 @@ public:
       while (center <= oldCenter + oldRadius) {
         auto mirroredCenter = oldCenter - (center - oldCenter);
         auto maxMirroredRadius = oldRadius - (center - oldCenter);
-        if (palindromeRadii[mirroredCenter] < maxMirroredRadius) {
+        if (static_cast<int64_t>(palindromeRadii[mirroredCenter]) <
+            maxMirroredRadius) {
           palindromeRadii[center] = palindromeRadii[mirroredCenter];
           ++center;
-        } else if (palindromeRadii[mirroredCenter] > maxMirroredRadius) {
+        } else if (static_cast<int64_t>(palindromeRadii[mirroredCenter]) >
+                   maxMirroredRadius) {
           palindromeRadii[center] = maxMirroredRadius;
           ++center;
         } else { // palindromeRadii[mirroredCenter] == maxMirroredRadius
