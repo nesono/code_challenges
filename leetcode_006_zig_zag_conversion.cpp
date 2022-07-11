@@ -1,7 +1,7 @@
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
 #include <tuple>
+#include <vector>
 
 #include "leetcode_000_common.h"
 
@@ -9,50 +9,49 @@ using namespace std;
 
 class Solution1 {
 public:
-    static int getFirstRowOffset(int numRows) {
-        if (numRows == 1) {
-            return 1;
-        }
-        else {
-            return (numRows-1) * 2;
-        }
+  static uint32_t getFirstRowOffset(uint32_t numRows) {
+    if (numRows == 1) {
+      return 1;
+    } else {
+      return (numRows - 1) * 2;
     }
+  }
 
-    static string convert(const string& s, int numRows) {
-        string result;
-        result.resize(s.size());
+  static string convert(const string &s, uint32_t numRows) {
+    string result;
+    result.resize(s.size());
 
-        int even_row_offset = getFirstRowOffset(numRows);
-        int odd_row_offset = 0;
+    uint32_t even_row_offset = getFirstRowOffset(numRows);
+    uint32_t odd_row_offset = 0;
 
-        int out_idx = 0;
+    uint32_t out_idx = 0;
 
-        for (int r = 0; r < numRows; ++r) {
-            int idx = r;
-            while (idx < s.size()) {
-                if (even_row_offset != 0 && idx < s.size()) {
-                    result[out_idx++] = s[idx];
-                    idx += even_row_offset;
-                }
-                if (odd_row_offset != 0 && idx < s.size()) {
-                    result[out_idx++] = s[idx];
-                    idx += odd_row_offset;
-                }
-            }
-            even_row_offset -= 2;
-            odd_row_offset += 2;
+    for (uint32_t r = 0U; r < numRows; ++r) {
+      uint32_t idx = r;
+      while (idx < s.size()) {
+        if (even_row_offset != 0 && idx < s.size()) {
+          result[out_idx++] = s[idx];
+          idx += even_row_offset;
         }
-        return result;
+        if (odd_row_offset != 0 && idx < s.size()) {
+          result[out_idx++] = s[idx];
+          idx += odd_row_offset;
+        }
+      }
+      even_row_offset -= 2;
+      odd_row_offset += 2;
     }
+    return result;
+  }
 };
 
-using TestParamType = vector<tuple<function<string(const string&, int)>, const tuple<const string&, int>, const string&>>;
+using TestParamType =
+    vector<tuple<function<string(const string &, int)>,
+                 const tuple<const string &, int>, const string &>>;
 
 int main() {
-    const string input{"PAYPALISHIRING"};
-    TestParamType params = {
-            {Solution1::convert, {input, 3}, "PAHNAPLSIIGYIR"},
-            {Solution1::convert, {input, 4}, "PINALSIGYAHRPI"}
-    };
-    return testMain(params);
+  const string input{"PAYPALISHIRING"};
+  TestParamType params = {{Solution1::convert, {input, 3}, "PAHNAPLSIIGYIR"},
+                          {Solution1::convert, {input, 4}, "PINALSIGYAHRPI"}};
+  return testMain(params);
 }
