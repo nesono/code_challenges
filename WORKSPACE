@@ -40,6 +40,15 @@ http_archive(
     # When you first run this tool, it'll recommend a sha256 hash to put here with a message like: "DEBUG: Rule 'hedron_compile_commands' indicated that a canonical reproducible form can be obtained by modifying arguments sha256 = ..."
 )
 
+# Eric Niebler's Rangev3 code
+# https://github.com/ericniebler/range-v3/archive/refs/tags/0.12.0.zip
+http_archive(
+    name = "rangev3",
+    sha256 = "cbcb96beda464e71d293c07dec89ef5c0790ca83d37b0e199890893019441044",
+    strip_prefix = "range-v3-0.12.0",
+    url = "https://github.com/ericniebler/range-v3/archive/refs/tags/0.12.0.zip",
+)
+
 load("@hedron_compile_commands//:workspace_setup.bzl", "hedron_compile_commands_setup")
 
 hedron_compile_commands_setup()

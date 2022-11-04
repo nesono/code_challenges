@@ -2,6 +2,9 @@
 #include <vector>
 #include <numeric>
 
+#include <range/v3/numeric/algorithm.hpp>
+#include <range/v3/view/transform.hpp>
+
 using namespace std;
 
 class Solution1 {
@@ -17,6 +20,14 @@ public:
             maxSum = std::max(maxSum, nums[idx]);
         }
         return maxSum;
+    }
+};
+
+class Solution2 {
+public:
+    // implementation using Kadane's algorithm
+    static int maxSubArray(vector<int>& nums) {
+        return ranges::max(nums | ranges::views::sliding(2) | ranges::views::transform());
     }
 };
 

@@ -103,3 +103,11 @@ cc_test(
     srcs = ["leetcode_2021-05-01_number_connected_components_graph.cpp"],
     deps = [":leetcode_common"],
 )
+
+cc_test(
+    name = "ranges_sum_squares",
+    srcs = [
+        "ranges_sum_squares.cpp",
+    ],
+    deps = ["@rangev3//:range-v3"],
+)
